@@ -53,17 +53,21 @@ const transform_cord2i_j = (x, y) => {
 }
 
 const select_cell = (ctx, i, j)=>{
-    const x = WITH_CELLS / 2 + i * WITH_CELLS;
-    const y = HEIGHT_CELLS / 2 + j * HEIGHT_CELLS;
+    const x = i * WITH_CELLS;
+    const y = j * HEIGHT_CELLS;
     ctx.beginPath();
-
+    ctx.lineWidth=4;
+    ctx.strokeStyle="#FF0000";
+    ctx.rect(x,y, WITH_CELLS, HEIGHT_CELLS);
     ctx.stroke();
+    ctx.lineWidth=1;
+    ctx.strokeStyle="#000";
 }
 
 const clear = (ctx)=>{
     ctx.beginPath();
     ctx.rect(0, 0, WIDTH, HEIGHT);
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = '#efefef';
     ctx.fill();
     ctx.stroke();
 }

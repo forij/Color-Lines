@@ -241,7 +241,7 @@ canvas.addEventListener('click', (e)=>{
         }
     }
     rerender(state_game_area, ctx);
-
+    select_cell(ctx, ...old_selected);
     el_score.innerHTML = `Score: ${score}`
 
     if( get_empty_cell(state_game_area).length == 0 ){
