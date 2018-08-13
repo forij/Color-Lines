@@ -1,6 +1,7 @@
 "use strict";
 
 const el_game_label = document.getElementById('game_label');
+let game_label__el_spans = [];
 const el_score = document.getElementById('score');
 
 const text_game_label = 'Color Lines'
@@ -12,8 +13,18 @@ const randrange = (min, max) => {
 for(let i = 0; i < text_game_label.length; i++){
     let el_span = document.createElement('span');
     el_span.innerHTML = text_game_label[i];
-    el_span.style.color = `rgb( ${randrange(0,256)}, ${randrange(0,256)}, ${randrange(0,256)})`;
+    el_span.style.color = COLOR_LIST[randrange(0,6)];
     el_game_label.append(el_span);
+    game_label__el_spans.push(el_span);
+}
+/* For fun */
+const gmae_lable__run_rainbow = () => { 
+    setInterval( ()=>{
+        for(let i = game_label__el_spans.length - 1; i > 0; i--){
+            game_label__el_spans[i].style.color = game_label__el_spans[i - 1].style.color;
+        }
+        game_label__el_spans[0].style.color = COLOR_LIST[randrange(0,6)];
+    }, 100 );
 }
 
 let state_game_area = [
@@ -240,11 +251,15 @@ canvas.addEventListener('click', (e)=>{
             }
         }
     }
+
     rerender(state_game_area, ctx);
-    select_cell(ctx, ...old_selected);
+    if( old_selected != false){
+        select_cell(ctx, ...old_selected);
+    }
     el_score.innerHTML = `Score: ${score}`
 
     if( get_empty_cell(state_game_area).length == 0 ){
+        gmae_lable__run_rainbow();
         alert(`Game over \n ${score}`);
     }
 } );
