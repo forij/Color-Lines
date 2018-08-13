@@ -1,0 +1,14 @@
+body{
+    background: #1e1e34;
+}
+
+#game_label{
+    text-align: center;
+}
+
+#game_area{
+    margin-left: calc(50% - 300px);
+    background: #efefef;
+    width: 600px;
+    height: 600px;
+}
